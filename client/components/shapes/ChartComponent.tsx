@@ -24,6 +24,17 @@ export function ChartComponent({ shape }: ChartComponentProps) {
         ]
       : [];
 
+  // Transform data for ResponsivePie
+  const pieData =
+    chartType === "pie"
+      ? data.map((item) => ({
+          id: item.country,
+          label: item.country,
+          value: item.hotdog, // or another key you want to visualize
+          color: `hsl(${Math.floor(Math.random() * 360)}, 70%, 50%)`, // Example random color generation
+        }))
+      : [];
+
   return (
     <div style={{ width: "100%", height: "100%" }}>
       {chartType === "bar" ? (
@@ -80,7 +91,7 @@ export function ChartComponent({ shape }: ChartComponentProps) {
         />
       ) : chartType === "pie" ? (
         <ResponsivePie
-          data={data}
+          data={pieData}
           margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
           innerRadius={0.5}
           padAngle={0.7}
