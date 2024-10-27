@@ -8,12 +8,57 @@ import {
 import { AutoRouter, IRequest, error } from 'itty-router'
 import throttle from 'lodash.throttle'
 import { Environment } from './types'
+import { TLBaseShape, T, vecModelValidator, RecordProps } from "tldraw";
+
+export type ChartShapeProps = {
+  w: number;
+  h: number;
+  chartType: string;
+  data: Array<{
+    country: string;
+    hotdog: number;
+    burger: number;
+    sandwich: number;
+    kebab: number;
+    fries: number;
+    donut: number;
+  }>;
+  position: { x: number; y: number };
+};
+
+export type ChartShape = TLBaseShape<"customChart", ChartShapeProps>;
+
+// Define validation properties for ChartShape
+export const chartShapePropsValidation: RecordProps<ChartShape> = {
+  w: T.number,
+  h: T.number,
+  chartType: T.string,
+  data: T.arrayOf(
+    T.object({
+      country: T.string,
+      hotdog: T.number,
+      burger: T.number,
+      sandwich: T.number,
+      kebab: T.number,
+      fries: T.number,
+      donut: T.number,
+    })
+  ),
+  position: vecModelValidator,
+};
 
 // add custom shapes and bindings here if needed:
 const schema = createTLSchema({
-	shapes: { ...defaultShapeSchemas },
-	// bindings: { ...defaultBindingSchemas },
-})
+  shapes: {
+    ...defaultShapeSchemas,
+    customChart: {
+      // validations for this shapes `props`
+      props: chartShapePropsValidation,
+      // migrations between versions of this shape
+    },
+  },
+  // bindings: { ...defaultBindingSchemas },
+});
 
 // each whiteboard room is hosted in a DurableObject:
 // https://developers.cloudflare.com/durable-objects/
