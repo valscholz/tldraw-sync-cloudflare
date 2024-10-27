@@ -24,6 +24,7 @@
 	"dependencies": {
 		"@cloudflare/types": "^6.29.0",
 		"@nivo/bar": "^0.87.0",
+		"@nivo/line": "^0.87.0",
 		"@nivo/pie": "^0.87.0",
 		"@tldraw/sync": "3.4.0",
 		"@tldraw/sync-core": "3.4.0",

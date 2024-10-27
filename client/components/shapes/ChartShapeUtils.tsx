@@ -1,13 +1,6 @@
-import { ResponsiveBar } from "@nivo/bar";
-import { BaseBoxShapeUtil, Polygon2d, Vec, StyleProp} from "tldraw";
+import { BaseBoxShapeUtil, Polygon2d, Vec } from "tldraw";
 import { ChartShape, chartShapePropsValidation } from "./ChartShape"; 
-
-
-export const chartTypeStyle = StyleProp.defineEnum("customChart:chartType", {
-  defaultValue: "bar",
-  values: ["bar", "line", "pie"],
-});
-
+import { ChartComponent } from "./ChartComponent";
 
 // Define the ChartShapeUtils class as a ShapeUtil
 export class ChartShapeUtils extends BaseBoxShapeUtil<ChartShape> {
@@ -39,61 +32,11 @@ export class ChartShapeUtils extends BaseBoxShapeUtil<ChartShape> {
   }
 
   override component(shape: ChartShape) {
-    const { data, w, h } = shape.props;
+    const { w, h } = shape.props;
 
     return (
       <div style={{ width: w, height: h }}>
-        <ResponsiveBar
-          data={data}
-          keys={["hotdog", "burger", "sandwich", "kebab", "fries", "donut"]}
-          indexBy="country"
-          margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
-          padding={0.3}
-          valueScale={{ type: "linear" }}
-          indexScale={{ type: "band", round: true }}
-          colors={{ scheme: "nivo" }}
-          borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
-          axisTop={null}
-          axisRight={null}
-          axisBottom={{
-            tickSize: 5,
-            tickPadding: 5,
-            tickRotation: 0,
-            legend: "country",
-            legendPosition: "middle",
-            legendOffset: 32,
-          }}
-          axisLeft={{
-            tickSize: 5,
-            tickPadding: 5,
-            tickRotation: 0,
-            legend: "food",
-            legendPosition: "middle",
-            legendOffset: -40,
-          }}
-          legends={[
-            {
-              dataFrom: "keys",
-              anchor: "bottom-right",
-              direction: "column",
-              justify: false,
-              translateX: 120,
-              translateY: 0,
-              itemsSpacing: 2,
-              itemWidth: 100,
-              itemHeight: 20,
-              itemDirection: "left-to-right",
-              itemOpacity: 0.85,
-              symbolSize: 20,
-              effects: [{ on: "hover", style: { itemOpacity: 1 } }],
-            },
-          ]}
-          role="application"
-          ariaLabel="Nivo bar chart demo"
-          barAriaLabel={(e) =>
-            `${e.id}: ${e.formattedValue} in country: ${e.indexValue}`
-          }
-        />
+        <ChartComponent shape={shape} />
       </div>
     );
   }

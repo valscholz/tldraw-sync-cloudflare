@@ -4,7 +4,7 @@ import {
   useEditor,
   useRelevantStyles,
 } from "tldraw";
-import { chartTypeStyle } from "./shapes/ChartShapeUtils";
+import { chartTypeStyle } from "./shapes/ChartShape";
 
 function CustomChartStylePanel() {
   const editor = useEditor();

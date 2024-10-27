@@ -1,10 +1,18 @@
-import { TLBaseShape, T, vecModelValidator, RecordProps } from "tldraw";
+import { TLBaseShape, T, vecModelValidator, RecordProps, StyleProp } from "tldraw";
+
+export const chartTypeStyle = StyleProp.defineEnum("customChart:chartType", {
+  defaultValue: "bar",
+  values: ["bar", "line", "pie"],
+});
+
+export type ChartTypeStyle = T.TypeOf<typeof chartTypeStyle>;
+
 
 // Define the properties type for ChartShape
 export type ChartShapeProps = {
   w: number;
   h: number;
-  chartType: string;
+  chartType: ChartTypeStyle;
   data: Array<{
     country: string;
     hotdog: number;
@@ -24,7 +32,7 @@ export type ChartShape = TLBaseShape<"customChart", ChartShapeProps>;
 export const chartShapePropsValidation: RecordProps<ChartShape> = {
   w: T.number,
   h: T.number,
-  chartType: T.string,
+  chartType: chartTypeStyle,
   data: T.arrayOf(
     T.object({
       country: T.string,
