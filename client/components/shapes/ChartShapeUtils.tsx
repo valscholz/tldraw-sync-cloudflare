@@ -1,10 +1,13 @@
 import { ResponsiveBar } from "@nivo/bar";
-import {
-  BaseBoxShapeUtil,
-  Polygon2d,
-  Vec,
-} from "tldraw";
+import { BaseBoxShapeUtil, Polygon2d, Vec, StyleProp} from "tldraw";
 import { ChartShape, chartShapePropsValidation } from "./ChartShape"; 
+
+
+export const chartTypeStyle = StyleProp.defineEnum("customChart:chartType", {
+  defaultValue: "bar",
+  values: ["bar", "line", "pie"],
+});
+
 
 // Define the ChartShapeUtils class as a ShapeUtil
 export class ChartShapeUtils extends BaseBoxShapeUtil<ChartShape> {
@@ -29,6 +32,10 @@ export class ChartShapeUtils extends BaseBoxShapeUtil<ChartShape> {
       ],
       position: { x: 0, y: 0 },
     };
+  }
+
+  override canEdit() {
+    return true;
   }
 
   override component(shape: ChartShape) {

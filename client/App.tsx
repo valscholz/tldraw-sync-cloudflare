@@ -10,6 +10,7 @@ import {
   components,
 } from "./components/ui-overrides";
 import { useMemo } from 'react';
+import CustomChartStylePanel from './components/CustomChartStylePanel';
 
 // Where is our worker located? Configure this in `vite.config.ts`
 const WORKER_URL = process.env.TLDRAW_WORKER_URL
@@ -41,10 +42,10 @@ function App() {
         tools={tools}
         overrides={uiOverrides}
         assetUrls={customAssetUrls}
-        components={components}
+        components={{ ...components, StylePanel: CustomChartStylePanel }}
         onMount={(editor) => {
           // when the editor is ready, we need to register our bookmark unfurling service
-					editor.registerExternalAssetHandler("url", getBookmarkPreview);
+          editor.registerExternalAssetHandler("url", getBookmarkPreview);
           editor.createShape({ type: "customChart", x: 100, y: 100 });
         }}
       />
