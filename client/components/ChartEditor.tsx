@@ -1,6 +1,6 @@
 // src/components/ChartEditor.tsx
-import React, { useState } from "react";
 import { ChartShape } from "./shapes/ChartShape";
+import { useState } from "react";
 
 interface ChartEditorProps {
   app: any; // Use `any` if `TldrawApp` type is unavailable
@@ -9,8 +9,8 @@ interface ChartEditorProps {
 }
 
 export function ChartEditor({ app, shape, onClose }: ChartEditorProps) {
-  const [chartType, setChartType] = useState(shape.props.chartType);
-  const [data, setData] = useState(shape.props.data);
+  const [chartType] = useState(shape.props.chartType);
+  const [data] = useState(shape.props.data);
 
   const handleSave = () => {
     app.updateShapes([

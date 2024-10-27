@@ -1,5 +1,4 @@
 // src/shapes/ChartComponent.tsx
-import React from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import { ResponsivePie } from "@nivo/pie";
 import { ChartShape } from "./ChartShape";
